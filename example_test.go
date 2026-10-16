@@ -11,6 +11,10 @@ import (
 func Example() {
 	result := banner.Render("GO", banner.WithFont(banner.Small))
 	fmt.Println(result)
+	// Output:
+	// ▄██ ▄█▄
+	// █▄█ █ █
+	// ▀██ ▀█▀
 }
 
 func ExampleWithStyle() {
