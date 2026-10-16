@@ -6,12 +6,14 @@ Gerador de banners em arte ASCII para interfaces de terminal — estilizado com 
 
 ## Funcionalidades
 
-- Converte texto em arte ASCII grande usando elementos de bloco Unicode (`▀▄█░▒▓`)
-- Tres tamanhos de fonte integrados: **Small** (3x3), **Medium** (5x5), **Large** (7x7)
+- Converte texto em arte ASCII grande usando elementos de bloco Unicode (`▀▄█`)
+- Três tamanhos de fonte integrados com **glifos quadrados**: **Small** (3×3), **Medium** (5×5), **Large** (7×7)
 - Suporte completo a estilos [Lip Gloss](https://github.com/charmbracelet/lipgloss)
-- Suporta letras A-Z, digitos 0-9 e pontuacao comum
+- Suporta letras A-Z, dígitos 0-9 e pontuação comum (`! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~`)
+- Letras acentuadas (`Á À Â Ã Ä É Ê Ë Í Î Ï Ó Ô Õ Ö Ú Û Ü Ç Ñ` …) reutilizam o glifo da letra base
+- Caracteres que não fazem parte da fonte são desenhados como espaço
 
-## Instalacao
+## Instalação
 
 ```bash
 go get github.com/junhinhow/charm-banner@latest
@@ -46,12 +48,20 @@ func main() {
 
 ## API
 
-| Funcao | Descricao |
+| Função | Descrição |
 |--------|-----------|
 | `Render(text string, opts ...Option) string` | Renderiza texto como banner em arte ASCII |
 | `WithFont(Font) Option` | Define o tamanho da fonte: `Small`, `Medium`, `Large` |
-| `WithStyle(lipgloss.Style) Option` | Aplica um estilo Lip Gloss na saida |
+| `WithStyle(lipgloss.Style) Option` | Aplica um estilo Lip Gloss na saída |
 
-## Licenca
+## Observações
+
+- `Render("")` devolve uma string vazia.
+- Cada caractere da entrada ocupa exatamente a largura da fonte (3, 5 ou 7 colunas) e todas as
+  linhas de um banner têm sempre a mesma largura.
+- O texto é normalizado antes da renderização: letras minúsculas viram maiúsculas e letras
+  acentuadas caem na letra base (`"Á"` é desenhado exatamente como `"A"`).
+
+## Licença
 
 [MIT](LICENSE)
